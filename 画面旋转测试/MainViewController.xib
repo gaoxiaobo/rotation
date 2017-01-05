@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="bg" destination="gkU-lQ-l42" id="1Lo-zz-zqp"/>
+                <outlet property="btn" destination="TUd-mH-NJq" id="6qA-3c-ANZ"/>
                 <outlet property="subView" destination="J3D-U4-LF9" id="VDX-7O-Nds"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,9 +34,14 @@
                                     <rect key="frame" x="297" y="162" width="70" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="0.648968962585034" blue="0.29703443877551022" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="tranform">
+                                    <state key="normal" title="全屏">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="3"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="tranfrom:" destination="-1" eventType="touchUpInside" id="6s4-jh-lu1"/>
                                     </connections>
@@ -49,6 +55,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="3.5" y="33.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="tNV-Va-epF">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="436" y="34"/>
         </view>
     </objects>
 </document>

@@ -12,6 +12,7 @@
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bg;
 @property (weak, nonatomic) IBOutlet UIView *subView;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @end
 
@@ -30,6 +31,9 @@
     self.bg.frame = CGRectMake(0, 0, kUIScreenWidth, kUIScreenWidth * 9/16);
     self.subView.frame = CGRectMake(0, 0, kUIScreenWidth, kUIScreenWidth * 9/16);
     self.subView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    self.btn.frame = CGRectMake(kUIScreenWidth - 70 - 8, kUIScreenWidth * 9/16 - 30 - 8 , 70, 30);
+    self.btn.autoresizingMask =  UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
 }
 
 //- (BOOL)shouldAutorotate
@@ -60,20 +64,37 @@
 //    application.keyWindow.transform=CGAffineTransformMakeRotation(M_PI);
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
-    [self.bg removeFromSuperview];
-    [self.view.window addSubview:self.bg];
-    self.bg.frame = CGRectMake(0, 64, kUIScreenWidth, kUIScreenWidth * 9/16);
-    [UIView animateWithDuration:0.25 animations:^{
-        self.bg.frame = CGRectMake(0, 0, kUIScreenHeight, kUIScreenWidth);
-    } completion:^(BOOL finished) {
-        CGFloat anchorX = kUIScreenWidth/2/kUIScreenHeight;
-        CGFloat anchorY = 0.5;
-        self.bg.layer.anchorPoint = CGPointMake(anchorX, anchorY);
-        self.bg.layer.position = CGPointMake(kUIScreenWidth/2, kUIScreenWidth/2);
-        
-        [self rotation:0.25 angle:M_PI_2 z:0 repeatCount:0];
-        
-    }];
+    if (self.bg.bounds.size.width == kUIScreenWidth) {
+        [self.bg removeFromSuperview];
+        [self.view.window addSubview:self.bg];
+        self.bg.frame = CGRectMake(0, 64, kUIScreenWidth, kUIScreenWidth * 9/16);
+        [UIView animateWithDuration:0.25 animations:^{
+            self.bg.frame = CGRectMake(0, 0, kUIScreenHeight, kUIScreenWidth);
+            self.btn.frame = CGRectMake(kUIScreenHeight - 70 - 8, kUIScreenWidth - 30 - 8, 70, 30);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.25 animations:^{
+                CGFloat anchorX = kUIScreenWidth/2/kUIScreenHeight;
+                CGFloat anchorY = 0.5;
+                self.bg.layer.anchorPoint = CGPointMake(anchorX, anchorY);
+                self.bg.layer.position = CGPointMake(kUIScreenWidth/2, kUIScreenWidth/2);
+                self.bg.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1);
+            }];
+        }];
+
+    }else {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.bg.layer.transform = CATransform3DMakeRotation(0, 0, 0, 1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.25 animations:^{
+               self.bg.frame = CGRectMake(0, 64, kUIScreenWidth, kUIScreenWidth * 9/16);
+            } completion:^(BOOL finished) {
+                [self.bg removeFromSuperview];
+                [self.view addSubview:self.bg];
+                self.bg.frame = CGRectMake(0, 0, kUIScreenWidth, kUIScreenWidth * 9/16);
+                self.btn.frame = CGRectMake(kUIScreenWidth - 70 - 8, kUIScreenWidth * 9/16 - 30 - 8 , 70, 30);
+            }];
+        }];
+    }
 }
 
 - (CABasicAnimation *)rotation:(float)dur angle:(float)angle z:(int)z repeatCount:(int)repeatCount //旋转
